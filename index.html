@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Card Interactive</title>
+    <title>Common Assumptions - Flip Cards</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Font (Inter) -->
-    <!-- Removed the Google Font <link> tags for 'Inter' -->
     
     <style>
         /* Define brand colors as CSS variables */
@@ -16,15 +13,16 @@
             --color-light-purple: #C6B4D9;
             --color-dark-purple: #513873;
             --color-very-dark: #413659;
-            --color-light-gray: #F2F2F2;
+            /* Updated background color as requested */
+            --color-light-gray: #F6F5F8;
             --color-muted-purple: #9C7F9D;
             --font-family-sans: 'Helvetica', Arial, sans-serif;
 
-            /* --- NEW SHADES FOR 3D EFFECT --- */
-            --color-light-purple-light: #dbcaea; /* Lighter shade of C6B4D9 */
-            --color-light-purple-dark: #af9ebf; /* Darker shade of C6B4D9 */
-            --color-dark-purple-light: #6b4c91; /* Lighter shade of 513873 */
-            --color-dark-purple-dark: #412c5e; /* Darker shade of 513873 */
+            /* --- SHADES FOR 3D EFFECT --- */
+            --color-light-purple-light: #dbcaea; 
+            --color-light-purple-dark: #af9ebf; 
+            --color-dark-purple-light: #6b4c91; 
+            --color-dark-purple-dark: #412c5e; 
         }
 
         body {
@@ -36,10 +34,11 @@
         .flip-card {
             background-color: transparent;
             width: 100%;
-            aspect-ratio: 4 / 3; /* Gives a 'tile' like shape */
+            /* COMPACT CHANGE: Changed from 4/3 to 2.2/1 for a shorter, wider card */
+            aspect-ratio: 2.2 / 1; 
             perspective: 1000px; /* 3D effect */
             cursor: pointer;
-            border-radius: 0.75rem; /* 12px */
+            border-radius: 0.5rem; /* Slightly smaller radius for compact look */
         }
 
         /* This container does the actual 3D flip */
@@ -48,11 +47,10 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.7s;
+            transition: transform 0.6s; /* Slightly faster flip */
             transform-style: preserve-3d;
-            /* --- UPDATED SHADOW --- */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem; 
         }
 
         /* Flip the card when the .flipped class is added to .flip-card */
@@ -68,29 +66,28 @@
             height: 100%;
             -webkit-backface-visibility: hidden; /* Safari */
             backface-visibility: hidden;
-            border-radius: 0.75rem; /* 12px */
+            border-radius: 0.5rem; 
             
             /* Flexbox to center content */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem; /* 24px */
-
-            /* --- NEW PROPERTIES FOR 3D LOOK --- */
-            box-sizing: border-box; /* Ensure border is included in size */
+            padding: 0.75rem; /* Reduced padding for compactness */
+            box-sizing: border-box; 
+            line-height: 1.3;
         }
 
         /* Style the front face */
         .flip-card-front {
             background-color: var(--color-light-purple);
             color: var(--color-very-dark);
-            font-weight: 500;
+            font-weight: 600;
 
-            /* --- NEW 3D BEVEL BORDERS --- */
-            border-top: 4px solid var(--color-light-purple-light);
-            border-left: 4px solid var(--color-light-purple-light);
-            border-bottom: 4px solid var(--color-light-purple-dark);
-            border-right: 4px solid var(--color-light-purple-dark);
+            /* 3D BEVEL BORDERS */
+            border-top: 3px solid var(--color-light-purple-light);
+            border-left: 3px solid var(--color-light-purple-light);
+            border-bottom: 3px solid var(--color-light-purple-dark);
+            border-right: 3px solid var(--color-light-purple-dark);
         }
 
         /* Style the back face */
@@ -98,130 +95,134 @@
             background-color: var(--color-dark-purple);
             color: var(--color-light-gray);
             transform: rotateY(180deg);
+            font-size: 0.95rem; /* Slightly smaller text for back */
 
-            /* --- NEW 3D BEVEL BORDERS --- */
-            border-top: 4px solid var(--color-dark-purple-light);
-            border-left: 4px solid var(--color-dark-purple-light);
-            border-bottom: 4px solid var(--color-dark-purple-dark);
-            border-right: 4px solid var(--color-dark-purple-dark);
+            /* 3D BEVEL BORDERS */
+            border-top: 3px solid var(--color-dark-purple-light);
+            border-left: 3px solid var(--color-dark-purple-light);
+            border-bottom: 3px solid var(--color-dark-purple-dark);
+            border-right: 3px solid var(--color-dark-purple-dark);
         }
     </style>
 </head>
-<body class="bg-gray-100 antialiased">
+<!-- Removed bg-gray-100 so the CSS variable --color-light-gray takes effect -->
+<body class="antialiased min-h-screen flex flex-col justify-center">
 
-    <div class="container mx-auto max-w-5xl p-4 sm:p-8">
+    <!-- Reduced vertical padding (py-2.5) by approx 40% from p-4 -->
+    <div class="container mx-auto max-w-6xl px-4 py-2.5">
         
-        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8" style="color: var(--color-very-dark);">
+        <!-- Reduced bottom margin (mb-3.5) by approx 40% from mb-6 -->
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-3.5" style="color: var(--color-very-dark);">
             Common Assumptions
         </h1>
 
-        <!-- Responsive Grid Container -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <!-- Grid Layout: 3 columns on large screens for a 3x3 grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-4">
 
-            <!-- Card 1 -->
+            <!-- Card 1 (Male) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Choice</p>
+                        <p class="text-lg">Choice</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">Why doesn't she just leave?</p>
+                        <p>Why doesn't he just leave?</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            <!-- Card 2 (Male) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Her fault</p>
+                        <p class="text-lg">His Fault</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">She is going to get herself killed.</p>
+                        <p>He is going to get himself killed.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 3 -->
+            <!-- Card 3 (Female) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Weak</p>
+                        <p class="text-lg">Weak</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">Why does she keep ... reaching out then not following through?</p>
+                        <p>Why does she keep reaching out then not following through?</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Card 4 (Male) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Attraction</p>
+                        <p class="text-lg">Attraction</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">Why is she is 'attracted' to these people?</p>
+                        <p>Why is he 'attracted' to these people?</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 5 -->
+            <!-- Card 5 (Female) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Pretending</p>
+                        <p class="text-lg">Pretending</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">Why does she keep 'pretending' and not just say something?</p>
+                        <p>Why does she keep 'pretending' and not just say something?</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 6 -->
+            <!-- Card 6 (Female) -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Brain Washed</p>
+                        <p class="text-lg">Ignorance</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">She is 'brain washed'.</p>
+                        <p>If she 'knew' better, she would choose better.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 7 -->
+            <!-- Card 7 (Female) - NEW -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Denial</p>
+                        <p class="text-lg">Provocation</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">She is in 'denial'.</p>
+                        <p>She must have done something to provoke it.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 8 -->
+            <!-- Card 8 (Male) - NEW -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Not Ready</p>
+                        <p class="text-lg">Strength</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">She is just not 'ready'</p>
+                        <p>Why didn't he just fight back?</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 9 -->
+            <!-- Card 9 (Female) - NEW -->
             <div class="flip-card group" tabindex="0" role="button" aria-pressed="false">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-lg md:text-xl">Ignorance</p>
+                        <p class="text-lg">Drama</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-lg">If she 'knew' better, she would choose better</p>
+                        <p>She is just being dramatic.</p>
                     </div>
                 </div>
             </div>
